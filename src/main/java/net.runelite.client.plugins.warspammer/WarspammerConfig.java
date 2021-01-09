@@ -10,6 +10,15 @@ import net.runelite.client.config.ModifierlessKeybind;
 public interface WarspammerConfig extends Config
 {
 	@ConfigItem(
+			position = 0,
+			keyName = "manualEnter",
+			name = "Manually press enter?",
+			description = "Manually press enter?"
+	)
+	default boolean manuallyEnter()
+	{ return false; }
+
+	@ConfigItem(
 		position = 1,
 		keyName = "pileSpam",
 		name = "Spam pile name",

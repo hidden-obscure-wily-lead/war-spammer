@@ -138,8 +138,19 @@ public class WarspammerPlugin extends Plugin
 					int code = KeyEvent.getExtendedKeyCodeForChar(c);
 					if (Character.isUpperCase(c) || isShiftChar(c))
 						r.keyPress(KeyEvent.VK_SHIFT);
-					r.keyPress(code);
-					r.keyRelease(code);
+					if(code == 513){
+						r.keyPress(KeyEvent.VK_SEMICOLON);
+						r.keyRelease(KeyEvent.VK_SEMICOLON);
+					}else if(code == 517){
+						r.keyPress(KeyEvent.VK_1);
+						r.keyRelease(KeyEvent.VK_1);
+					}else if(code == 512){
+						r.keyPress(KeyEvent.VK_QUOTE);
+						r.keyRelease(KeyEvent.VK_QUOTE);
+					}else{
+						r.keyPress(code);
+						r.keyRelease(code);
+					}
 					if (Character.isUpperCase(c) || isShiftChar(c))
 						r.keyRelease(KeyEvent.VK_SHIFT);
 					try
@@ -151,8 +162,10 @@ public class WarspammerPlugin extends Plugin
 						Thread.currentThread().interrupt();
 					}
 				}
-				r.keyPress(KeyEvent.VK_ENTER);
-				r.keyRelease(KeyEvent.VK_ENTER);
+				if(!config.manuallyEnter()) {
+					r.keyPress(KeyEvent.VK_ENTER);
+					r.keyRelease(KeyEvent.VK_ENTER);
+				}
 				initial = false;
 				lastSendTick = currentTick;
 			}
