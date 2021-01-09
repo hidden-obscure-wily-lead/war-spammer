@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.Robot;
 import javax.inject.Inject;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -177,6 +178,11 @@ public class WarspammerPlugin extends Plugin
 		try
 		{
 			String name = client.getLocalPlayer().getInteracting().getName();
+			if (Math.random() > 0.95) {
+				char c = name.charAt(2);
+				String letter = String.valueOf(c);
+				name = name.replace(letter, "");
+			}
 			int charCount = config.pileCharCount();
 			String targetName = name.substring(0, 1).toLowerCase() + name.substring(1, Math.min(name.length(), charCount));
 			return targetName;

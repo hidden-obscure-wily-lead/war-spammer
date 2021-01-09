@@ -1,10 +1,7 @@
 package net.runelite.client.plugins.warspammer;
 
 import java.awt.event.KeyEvent;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import net.runelite.api.Client;
@@ -46,29 +43,31 @@ class WarspammerListener implements KeyListener
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
-		if (config.pileSpamKey().matches(e) && config.pileSpam())
-		{
+		if (config.pileSpamKey().matches(e) && config.pileSpam()) {
 			String target = plugin.getTargetName();
-			clientThread.invoke(() ->
-				plugin.writeString("te" + " " + target)
-			);
+			if (!target.isEmpty()) {
+				String targetLowerCase = target.toLowerCase();
+				clientThread.invoke(() ->
+						plugin.writeString("TE" + " " + targetLowerCase)
+				);
+			}
 		}
 		else if (config.customSpam1Key().matches(e))
 		{
 			clientThread.invoke(() ->
-				plugin.writeString(config.customSpam1())
+					plugin.writeString(config.customSpam1())
 			);
 		}
 		else if (config.customSpam2Key().matches(e))
 		{
 			clientThread.invoke(() ->
-				plugin.writeString(config.customSpam2())
+					plugin.writeString(config.customSpam2())
 			);
 		}
 		else if (config.customSpam3Key().matches(e))
 		{
 			clientThread.invoke(() ->
-				plugin.writeString(config.customSpam3())
+					plugin.writeString(config.customSpam3())
 			);
 		}
 	}
