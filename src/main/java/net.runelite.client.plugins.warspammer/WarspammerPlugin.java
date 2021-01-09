@@ -21,22 +21,18 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.input.KeyManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginType;
 import net.runelite.client.ui.JagexColors;
 import net.runelite.client.util.ColorUtil;
-import org.pf4j.Extension;
 
-@Extension
 @PluginDescriptor(
-	name = "War Spammer",
-	description = "War spamming utils",
-	tags = {"PvP"},
-	type = PluginType.PVP
+		name = "War Spammer",
+		description = "War spamming utils"
 )
 
 public class WarspammerPlugin extends Plugin
 {
 	private static final String PRESS_ENTER_TO_CHAT = "Press Enter to Chat...";
+	private static String OS = System.getProperty("os.name").toLowerCase();
 
 	@Inject
 	private Client client;
@@ -138,13 +134,13 @@ public class WarspammerPlugin extends Plugin
 					int code = KeyEvent.getExtendedKeyCodeForChar(c);
 					if (Character.isUpperCase(c) || isShiftChar(c))
 						r.keyPress(KeyEvent.VK_SHIFT);
-					if(code == 513){
+					if(code == 513 && OS.indexOf("win") >= 0){
 						r.keyPress(KeyEvent.VK_SEMICOLON);
 						r.keyRelease(KeyEvent.VK_SEMICOLON);
-					}else if(code == 517){
+					}else if(code == 517 && OS.indexOf("win") >= 0){
 						r.keyPress(KeyEvent.VK_1);
 						r.keyRelease(KeyEvent.VK_1);
-					}else if(code == 512){
+					}else if(code == 512 && OS.indexOf("win") >= 0){
 						r.keyPress(KeyEvent.VK_QUOTE);
 						r.keyRelease(KeyEvent.VK_QUOTE);
 					}else{
@@ -202,8 +198,6 @@ public class WarspammerPlugin extends Plugin
 			case '@':
 			case '#':
 			case '$':
-			case '%':
-			case '^':
 			case '&':
 			case '*':
 			case '(':
@@ -212,12 +206,10 @@ public class WarspammerPlugin extends Plugin
 			case '+':
 			case '{':
 			case '}':
-			case '|':
 			case ':':
 			case '"':
 			case '<':
 			case '>':
-			case '?':
 				return true;
 			default:
 				return false;
